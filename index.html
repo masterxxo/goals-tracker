@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moje Cele</title>
+    <style>
+        :root {
+            --primary-color: #39FF14; /* Neonowy zielony */
+            --secondary-color: #CA03ED; /* Neonowy fiolet */
+            --accent-color: #A6A6A6; /* Srebrny/szary */
+            
+            --bg-color: #121212;
+            --card-bg-color: #1e1e1e;
+            --text-color: #e0e0e0;
+            --text-secondary-color: #aaaaaa;
+            --border-color: #333333;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: var(--card-bg-color);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        h1 {
+            color: var(--text-color);
+            margin-bottom: 10px;
+            font-size: 2.5rem;
+            text-shadow: 0 0 10px var(--accent-color);
+        }
+        
+        .subtitle {
+            color: var(--text-secondary-color);
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+        
+        .goals-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+        
+        .goal-card {
+            background-color: var(--card-bg-color);
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .goal-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+        }
+        
+        .goal-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+        }
+        
+        .goal-card.professional::before {
+            background-color: var(--primary-color);
+            box-shadow: 0 0 10px var(--primary-color);
+        }
+        
+        .goal-card.personal::before {
+            background-color: var(--secondary-color);
+            box-shadow: 0 0 10px var(--secondary-color);
+        }
+        
+        .goal-card.project::before {
+            background-color: var(--accent-color);
+            box-shadow: 0 0 10px var(--accent-color);
+        }
+        
+        .goal-card h2 {
+            margin-top: 0;
+            margin-bottom: 15px;
+            color: var(--text-color);
+            font-size: 1.4rem;
+        }
+        
+        .goal-category {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .goal-category.professional {
+            background-color: rgba(57, 255, 20, 0.2);
+            color: var(--primary-color);
+        }
+        
+        .goal-category.personal {
+            background-color: rgba(202, 3, 237, 0.2);
+            color: var(--secondary-color);
+        }
+        
+        .goal-category.project {
+            background-color: rgba(166, 166, 166, 0.2);
+            color: var(--accent-color);
+        }
+        
+        .goal-description {
+            margin-bottom: 20px;
+            color: var(--text-color);
+        }
+        
+        .progress-container {
+            margin-bottom: 10px;
+        }
+        
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--text-color);
+        }
+        
+        .progress-bar {
+            height: 10px;
+            background-color: var(--border-color);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        .progress-value {
+            height: 100%;
+            border-radius: 5px;
+            transition: width 1s ease-in-out;
+        }
+        
+        .professional .progress-value {
+            background-color: var(--primary-color);
+            box-shadow: 0 0 10px var(--primary-color);
+        }
+        
+        .personal .progress-value {
+            background-color: var(--secondary-color);
+            box-shadow: 0 0 10px var(--secondary-color);
+        }
+        
+        .project .progress-value {
+            background-color: var(--accent-color);
+            box-shadow: 0 0 10px var(--accent-color);
+        }
+        
+        .goal-dates {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            color: var(--text-secondary-color);
+            margin-top: 15px;
+            transition: color 0.3s ease;
+        }
+        
+        .goal-updates {
+            margin-top: 20px;
+            border-top: 1px dashed var(--border-color);
+            padding-top: 15px;
+            transition: border-color 0.3s ease;
+        }
+        
+        .goal-updates h3 {
+            font-size: 1rem;
+            color: var(--text-color);
+            margin-top: 0;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+        
+        .goal-updates h3 .toggle-icon {
+            margin-left: 5px;
+            transition: transform 0.3s ease;
+            filter: var(--toggle-icon-filter);
+        }
+        
+        .goal-updates h3 .toggle-icon.open {
+            transform: rotate(180deg);
+        }
+        
+        .update-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+        }
+        
+        .update-list.open {
+            max-height: 500px;
+        }
+        
+        .update-item {
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border-color);
+            transition: border-color 0.3s ease;
+        }
+        
+        .update-item:last-child {
+            border-bottom: none;
+        }
+        
+        .update-date {
+            font-size: 0.8rem;
+            color: var(--text-secondary-color);
+            display: block;
+            margin-bottom: 5px;
+            transition: color 0.3s ease;
+        }
+        
+        .update-text {
+            font-size: 0.9rem;
+            color: var(--text-color);
+            transition: color 0.3s ease;
+        }
+        
+        .last-updated {
+            text-align: center;
+            margin-top: 40px;
+            color: var(--text-secondary-color);
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            color: var(--text-secondary-color);
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+        
+        footer a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        footer a:hover {
+            text-decoration: underline;
+        }
+        
+        [data-theme="dark"] footer a {
+            color: var(--primary-color);
+        }
+        
+        /* Animacja neonowego pulsu dla ciemnego trybu */
+        /* Animacja neonowego pulsu */
+        @keyframes neonPulseGreen {
+            0% {
+                box-shadow: 0 0 5px var(--primary-color), 0 0 10px var(--primary-color);
+            }
+            50% {
+                box-shadow: 0 0 10px var(--primary-color), 0 0 20px var(--primary-color);
+            }
+            100% {
+                box-shadow: 0 0 5px var(--primary-color), 0 0 10px var(--primary-color);
+            }
+        }
+        
+        .goal-card.professional:hover::before {
+            animation: neonPulseGreen 2s infinite;
+        }
+        
+        @keyframes neonPulseViolet {
+            0% {
+                box-shadow: 0 0 5px var(--secondary-color), 0 0 10px var(--secondary-color);
+            }
+            50% {
+                box-shadow: 0 0 10px var(--secondary-color), 0 0 20px var(--secondary-color);
+            }
+            100% {
+                box-shadow: 0 0 5px var(--secondary-color), 0 0 10px var(--secondary-color);
+            }
+        }
+        
+        .goal-card.personal:hover::before {
+            animation: neonPulseViolet 2s infinite;
+        }
+        
+        @keyframes neonPulseWhite {
+            0% {
+                box-shadow: 0 0 5px var(--accent-color), 0 0 10px var(--accent-color);
+            }
+            50% {
+                box-shadow: 0 0 10px var(--accent-color), 0 0 20px var(--accent-color);
+            }
+            100% {
+                box-shadow: 0 0 5px var(--accent-color), 0 0 10px var(--accent-color);
+            }
+        }
+        
+        .goal-card.project:hover::before {
+            animation: neonPulseWhite 2s infinite;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Moje Cele</h1>
+            <p class="subtitle">Śledzenie postępu w realizacji moich celów zawodowych i osobistych</p>
+        </header>
+        
+        <div class="goals-container">
+            <!-- Cel 1 -->
+            <div class="goal-card professional">
+                <span class="goal-category professional">Zawodowy</span>
+                <h2>Ekspert AI dla funduszy inwestycyjnych</h2>
+                <p class="goal-description">Zbudowanie silnej pozycji jako specjalista AI dla funduszy inwestycyjnych poprzez publikacje, networking i realizację projektów.</p>
+                <div class="progress-container">
+                    <div class="progress-label">
+                        <span>Postęp</span>
+                        <span>35%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-value" style="width: 35%"></div>
+                    </div>
+                </div>
+                <div class="goal-dates">
+                    <span>Start: Styczeń 2025</span>
+                    <span>Deadline: Grudzień 2025</span>
+                </div>
+                <div class="goal-updates">
+                    <h3 onclick="toggleUpdates(this)">
+                        Historia aktualizacji
+                        <span class="toggle-icon">▼</span>
+                    </h3>
+                    <ul class="update-list">
+                        <li class="update-item">
+                            <span class="update-date">10 marca 2025</span>
+                            <p class="update-text">Nawiązałem kontakt z trzema funduszami inwestycyjnymi zainteresowanymi wdrożeniem AI.</p>
+                        </li>
+                        <li class="update-item">
+                            <span class="update-date">15 lutego 2025</span>
+                            <p class="update-text">Opublikowałem artykuł na temat wykorzystania AI w analizie rynków finansowych.</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Cel 2 -->
+            <div class="goal-card project">
+                <span class="goal-category project">Projekt</span>
+                <h2>Blog technologiczny</h2>
+                <p class="goal-description">Rozwinięcie bloga o tematyce AI i frontend development z regularną publikacją artykułów (min. 2 miesięcznie).</p>
+                <div class="progress-container">
+                    <div class="progress-label">
+                        <span>Postęp</span>
+                        <span>60%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-value" style="width: 60%"></div>
+                    </div>
+                </div>
+                <div class="goal-dates">
+                    <span>Start: Wrzesień 2024</span>
+                    <span>Deadline: Ciągły</span>
+                </div>
+                <div class="goal-updates">
+                    <h3 onclick="toggleUpdates(this)">
+                        Historia aktualizacji
+                        <span class="toggle-icon">▼</span>
+                    </h3>
+                    <ul class="update-list">
+                        <li class="update-item">
+                            <span class="update-date">5 marca 2025</span>
+                            <p class="update-text">Opublikowałem artykuł o generowaniu ilustracji przy pomocy AI, który osiągnął rekordową liczbę odwiedzin.</p>
+                        </li>
+                        <li class="update-item">
+                            <span class="update-date">20 lutego 2025</span>
+                            <p class="update-text">Wdrożyłem nowy system komentarzy i analitykę na blogu.</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Cel 3 -->
+            <div class="goal-card project">
+                <span class="goal-category project">Projekt</span>
+                <h2>Kanał YouTube</h2>
+                <p class="goal-description">Utworzenie i rozwój kanału na YouTube z treściami o AI i frontend development. Cel: 1000 subskrybentów.</p>
+                <div class="progress-container">
+                    <div class="progress-label">
+                        <span>Postęp</span>
+                        <span>25%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-value" style="width: 25%"></div>
+                    </div>
+                </div>
+                <div class="goal-dates">
+                    <span>Start: Luty 2025</span>
+                    <span>Deadline: Luty 2026</span>
+                </div>
+                <div class="goal-updates">
+                    <h3 onclick="toggleUpdates(this)">
+                        Historia aktualizacji
+                        <span class="toggle-icon">▼</span>
+                    </h3>
+                    <ul class="update-list">
+                        <li class="update-item">
+                            <span class="update-date">1 marca 2025</span>
+                            <p class="update-text">Opublikowałem pierwszy film na kanale, planowany cykl o integracji AI z aplikacjami frontendowymi.</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Cel 4 -->
+            <div class="goal-card personal">
+                <span class="goal-category personal">Osobisty</span>
+                <h2>Work-Life Balance</h2>
+                <p class="goal-description">Poświęcanie więcej czasu na aktywności rodzinne przy zachowaniu wysokiej produktywności zawodowej.</p>
+                <div class="progress-container">
+                    <div class="progress-label">
+                        <span>Postęp</span>
+                        <span>40%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-value" style="width: 40%"></div>
+                    </div>
+                </div>
+                <div class="goal-dates">
+                    <span>Start: Styczeń 2025</span>
+                    <span>Deadline: Ciągły</span>
+                </div>
+                <div class="goal-updates">
+                    <h3 onclick="toggleUpdates(this)">
+                        Historia aktualizacji
+                        <span class="toggle-icon">▼</span>
+                    </h3>
+                    <ul class="update-list">
+                        <li class="update-item">
+                            <span class="update-date">8 marca 2025</span>
+                            <p class="update-text">Wprowadziłem system planowania tygodniowego, który pomaga lepiej zarządzać czasem między pracą a rodziną.</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Cel 5 -->
+            <div class="goal-card project">
+                <span class="goal-category project">Projekt</span>
+                <h2>Lista mailingowa</h2>
+                <p class="goal-description">Zbudowanie listy mailingowej z 5000 subskrybentów zainteresowanych tematyką AI i frontend development.</p>
+                <div class="progress-container">
+                    <div class="progress-label">
+                        <span>Postęp</span>
+                        <span>15%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-value" style="width: 15%"></div>
+                    </div>
+                </div>
+                <div class="goal-dates">
+                    <span>Start: Marzec 2025</span>
+                    <span>Deadline: Marzec 2026</span>
+                </div>
+                <div class="goal-updates">
+                    <h3 onclick="toggleUpdates(this)">
+                        Historia aktualizacji
+                        <span class="toggle-icon">▼</span>
+                    </h3>
+                    <ul class="update-list">
+                        <li class="update-item">
+                            <span class="update-date">5 marca 2025</span>
+                            <p class="update-text">Przygotowałem landing page dla listy mailingowej i umieściłem formularz zapisu na blogu.</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Cel 6 -->
+            <div class="goal-card professional">
+                <span class="goal-category professional">Zawodowy</span>
+                <h2>Projekt AI dla branży finansowej</h2>
+                <p class="goal-description">Opracowanie i wdrożenie innowacyjnego projektu wykorzystującego AI dla sektora finansowego.</p>
+                <div class="progress-container">
+                    <div class="progress-label">
+                        <span>Postęp</span>
+                        <span>10%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-value" style="width: 10%"></div>
+                    </div>
+                </div>
+                <div class="goal-dates">
+                    <span>Start: Kwiecień 2025</span>
+                    <span>Deadline: Październik 2025</span>
+                </div>
+                <div class="goal-updates">
+                    <h3 onclick="toggleUpdates(this)">
+                        Historia aktualizacji
+                        <span class="toggle-icon">▼</span>
+                    </h3>
+                    <ul class="update-list">
+                        <li class="update-item">
+                            <span class="update-date">9 marca 2025</span>
+                            <p class="update-text">Rozpocząłem badanie potrzeb funduszy inwestycyjnych w kontekście aplikacji AI.</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <p class="last-updated">Ostatnia aktualizacja: 11 Marca 2025</p>
+        
+        <footer>
+            <p>© 2025 | Stworzone z <span style="color: #e74c3c;">❤</span> | <a href="https://github.com/masterxxo">GitHub</a></p>
+        </footer>
+    </div>
+    
+    <script>
+        function updateProgress(goalIndex, newProgress) {
+            const progressBars = document.querySelectorAll('.progress-value');
+            const progressLabels = document.querySelectorAll('.progress-label span:nth-child(2)');
+            
+            if (goalIndex >= 0 && goalIndex < progressBars.length) {
+                progressBars[goalIndex].style.width = newProgress + '%';
+                progressLabels[goalIndex].textContent = newProgress + '%';
+                
+                document.querySelector('.last-updated').textContent = 'Ostatnia aktualizacja: ' + new Date().toLocaleDateString('pl-PL');
+            }
+        }
+        
+        function toggleUpdates(element) {
+            const updateList = element.nextElementSibling;
+            updateList.classList.toggle('open');
+            
+            const toggleIcon = element.querySelector('.toggle-icon');
+            toggleIcon.classList.toggle('open');
+        }
+    </script>
+</body>
+</html>

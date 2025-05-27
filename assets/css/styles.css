@@ -129,10 +129,9 @@ h1 {
     box-shadow: 0 0 10px var(--health-color);
 }
 
-/* Styl dla zakończonych celów */
 .goal-card.completed::before {
-    background-color: var(--completed-color);
-    box-shadow: 0 0 10px var(--completed-color);
+    background-color: var(--completed-color) !important;
+    box-shadow: 0 0 10px var(--completed-color) !important;
     width: 10px;
 }
 
@@ -266,10 +265,9 @@ h1 {
     box-shadow: 0 0 10px var(--health-color);
 }
 
-/* Progress bar dla zakończonych celów */
-.completed .progress-value {
-    background-color: var(--completed-color);
-    box-shadow: 0 0 10px var(--completed-color);
+.goal-card.completed .progress-value {
+    background-color: var(--completed-color) !important;
+    box-shadow: 0 0 10px var(--completed-color) !important;
 }
 
 .goal-dates {

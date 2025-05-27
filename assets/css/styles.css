@@ -3,6 +3,7 @@
     --secondary-color: #CA03ED; /* Neonowy fiolet - Cele prywatne */
     --accent-color: #A6A6A6; /* Srebrny/szary - Cele finansowe */
     --health-color: #FF3131; /* Neonowy czerwony - Cele zdrowotne */
+    --completed-color: #FFD700; /* Złoty - Cele zakończone */
     
     --bg-color: #121212;
     --card-bg-color: #1e1e1e;
@@ -53,6 +54,37 @@ h1 {
     gap: 30px;
 }
 
+/* Sekcja zakończonych celów */
+.completed-goals-section {
+    margin-top: 60px;
+    border-top: 2px dashed var(--border-color);
+    padding-top: 40px;
+}
+
+.completed-section-title {
+    color: var(--completed-color);
+    font-size: 2rem;
+    margin-bottom: 30px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    text-shadow: 0 0 10px var(--completed-color);
+}
+
+.completed-icon {
+    font-size: 2.5rem;
+    color: var(--completed-color);
+    text-shadow: 0 0 15px var(--completed-color);
+}
+
+.completed-goals-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 30px;
+}
+
 .goal-card {
     background-color: var(--card-bg-color);
     border-radius: 8px;
@@ -95,6 +127,57 @@ h1 {
 .goal-card.health::before {
     background-color: var(--health-color);
     box-shadow: 0 0 10px var(--health-color);
+}
+
+/* Styl dla zakończonych celów */
+.goal-card.completed::before {
+    background-color: var(--completed-color);
+    box-shadow: 0 0 10px var(--completed-color);
+    width: 10px;
+}
+
+.goal-card.completed {
+    background: linear-gradient(135deg, var(--card-bg-color) 0%, rgba(255, 215, 0, 0.05) 100%);
+    border: 1px solid rgba(255, 215, 0, 0.2);
+}
+
+.completed-badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background-color: var(--completed-color);
+    color: var(--bg-color);
+    font-size: 0.7rem;
+    font-weight: bold;
+    padding: 4px 8px;
+    border-radius: 12px;
+    text-shadow: none;
+    box-shadow: 0 0 10px var(--completed-color);
+}
+
+.completion-info {
+    margin: 15px 0;
+    padding: 10px;
+    background-color: rgba(255, 215, 0, 0.1);
+    border-left: 3px solid var(--completed-color);
+    border-radius: 0 5px 5px 0;
+}
+
+.completion-date {
+    color: var(--completed-color);
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.completion-update {
+    background-color: rgba(255, 215, 0, 0.05);
+    border-left: 3px solid var(--completed-color);
+    padding-left: 15px;
+}
+
+.completion-update .update-text {
+    color: var(--completed-color);
+    font-weight: 500;
 }
 
 .goal-card h2 {
@@ -181,6 +264,12 @@ h1 {
 .health .progress-value {
     background-color: var(--health-color);
     box-shadow: 0 0 10px var(--health-color);
+}
+
+/* Progress bar dla zakończonych celów */
+.completed .progress-value {
+    background-color: var(--completed-color);
+    box-shadow: 0 0 10px var(--completed-color);
 }
 
 .goal-dates {
@@ -336,4 +425,21 @@ footer a:hover {
 
 .goal-card.health:hover::before {
     animation: neonPulseRed 2s infinite;
+}
+
+/* Animacja dla zakończonych celów */
+@keyframes neonPulseGold {
+    0% {
+        box-shadow: 0 0 10px var(--completed-color), 0 0 20px var(--completed-color);
+    }
+    50% {
+        box-shadow: 0 0 20px var(--completed-color), 0 0 30px var(--completed-color);
+    }
+    100% {
+        box-shadow: 0 0 10px var(--completed-color), 0 0 20px var(--completed-color);
+    }
+}
+
+.goal-card.completed:hover::before {
+    animation: neonPulseGold 2s infinite;
 }

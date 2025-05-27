@@ -47,46 +47,6 @@
                 </div>
             </div>
             
-            <!-- Cel 2 -->
-            <div class="goal-card personal">
-                <span class="goal-category personal">Prywatny</span>
-                <h2>Domek z drewna dla dzieci</h2>
-                <p class="goal-description">Budowa drewnianego domku dla dzieci w ogrodzie za domem - miejsce zabaw i rozwoju kreatywności.</p>
-                <div class="progress-container">
-                    <div class="progress-label">
-                        <span>Postęp</span>
-                        <span>50%</span>
-                    </div>
-                    <div class="progress-bar">
-                        <div class="progress-value" style="width: 50%"></div>
-                    </div>
-                </div>
-                <div class="goal-dates">
-                    <span>Start: Marzec 2025</span>
-                    <span>Deadline: Lipiec 2025</span>
-                </div>
-                <div class="goal-updates">
-                    <h3 onclick="toggleUpdates(this)">
-                        Historia aktualizacji
-                        <span class="toggle-icon">▼</span>
-                    </h3>
-                    <ul class="update-list">
-                        <li class="update-item">
-                            <span class="update-date">10 marca 2025</span>
-                            <p class="update-text">Żona opracowała projekt domku i zakontraktowała wykonawcę.</p>
-                        </li>
-                        <li class="update-item">
-                            <span class="update-date">26 marca 2025</span>
-                            <p class="update-text">Przygotowaliśmy drewno i zawieźliśmy do wykonawcy.</p>
-                        </li>
-                        <li class="update-item">
-                            <span class="update-date">07 kwietnia 2025</span>
-                            <p class="update-text">Domek został złożony, teraz czas na malowanie i wykończenie.</p>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            
             <!-- Cel 3 -->
             <div class="goal-card financial">
                 <span class="goal-category financial">Finansowy</span>
@@ -105,18 +65,6 @@
                     <span>Start: Styczeń 2024</span>
                     <span>Deadline: Grudzień 2025</span>
                 </div>
-                <!-- <div class="goal-updates">
-                    <h3 onclick="toggleUpdates(this)">
-                        Historia aktualizacji
-                        <span class="toggle-icon">▼</span>
-                    </h3>
-                    <ul class="update-list">
-                        <li class="update-item">
-                            <span class="update-date">1 marca 2025</span>
-                            <p class="update-text">Dokonałem nadpłaty kredytu, zmniejszając pozostały kapitał o dodatkowe 10%.</p>
-                        </li>
-                    </ul>
-                </div> -->
             </div>
             
             <!-- Cel 4 -->
@@ -216,7 +164,65 @@
             </div>
         </div>
         
-        <p class="last-updated">Ostatnia aktualizacja: 15 marca 2025</p>
+        <!-- Sekcja zakończonych celów -->
+        <div class="completed-goals-section">
+            <h2 class="completed-section-title">
+                <span class="completed-icon">✓</span>
+                Cele zakończone
+            </h2>
+            
+            <div class="completed-goals-container">
+                <!-- Zakończony cel - Domek z drewna dla dzieci -->
+                <div class="goal-card personal completed">
+                    <span class="goal-category personal">Prywatny</span>
+                    <div class="completed-badge">ZAKOŃCZONY</div>
+                    <h2>Domek z drewna dla dzieci</h2>
+                    <p class="goal-description">Budowa drewnianego domku dla dzieci w ogrodzie za domem - miejsce zabaw i rozwoju kreatywności.</p>
+                    <div class="progress-container">
+                        <div class="progress-label">
+                            <span>Postęp</span>
+                            <span>100%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-value" style="width: 100%"></div>
+                        </div>
+                    </div>
+                    <div class="goal-dates">
+                        <span>Start: Marzec 2025</span>
+                        <span>Zakończono: 27 maja 2025</span>
+                    </div>
+                    <div class="completion-info">
+                        <span class="completion-date">🎉 Cel osiągnięty: 27 maja 2025</span>
+                    </div>
+                    <div class="goal-updates">
+                        <h3 onclick="toggleUpdates(this)">
+                            Historia aktualizacji
+                            <span class="toggle-icon">▼</span>
+                        </h3>
+                        <ul class="update-list">
+                            <li class="update-item">
+                                <span class="update-date">10 marca 2025</span>
+                                <p class="update-text">Żona opracowała projekt domku i zakontraktowała wykonawcę.</p>
+                            </li>
+                            <li class="update-item">
+                                <span class="update-date">26 marca 2025</span>
+                                <p class="update-text">Przygotowaliśmy drewno i zawieźliśmy do wykonawcy.</p>
+                            </li>
+                            <li class="update-item">
+                                <span class="update-date">07 kwietnia 2025</span>
+                                <p class="update-text">Domek został złożony, teraz czas na malowanie i wykończenie.</p>
+                            </li>
+                            <li class="update-item completion-update">
+                                <span class="update-date">26 maja 2025</span>
+                                <p class="update-text">✅ Domek został złożony! Dzieci są zachwycone swoim nowym miejscem zabaw.</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <p class="last-updated">Ostatnia aktualizacja: 27 maja 2025</p>
         
         <footer>
             <p>© 2025 | Stworzone z <span style="color: var(--health-color);">❤</span> | <a href="https://github.com/username">GitHub</a></p>

@@ -198,6 +198,15 @@
                     <div class="completion-info">
                         <span class="completion-date">🎉 Cel osiągnięty: 27 maja 2025</span>
                     </div>
+                    <div class="goal-images">
+                        <h4>📸 Zdjęcia z realizacji</h4>
+                        <div class="images-grid">
+                            <div class="image-item" onclick="openImageModal(this)">
+                                <img src="assets/images/domek.jpg" alt="Gotowy domek">
+                                <div class="image-overlay">Gotowy domek!</div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="goal-updates">
                         <h3 onclick="toggleUpdates(this)">
                             Historia aktualizacji
@@ -232,6 +241,10 @@
             <p>© <script>document.write(getCurrentYear())</script> | Stworzone z <span style="color: var(--health-color);">❤</span> | <a href="https://github.com/username">GitHub</a></p>
         </footer>
     </div>
+
+    <div class="image-modal" id="imageModal" onclick="closeImageModal()">
+        <img class="modal-image" id="modalImage" alt="Powiększone zdjęcie">
+    </div>
     
     <script>
         function toggleUpdates(element) {
@@ -246,6 +259,33 @@
             return new Date().getFullYear();
         }
         
+        function openImageModal(imageElement) {
+            const modal = document.getElementById('imageModal');
+            const modalImage = document.getElementById('modalImage');
+            const img = imageElement.querySelector('img');
+            
+            modalImage.src = img.src;
+            modalImage.alt = img.alt;
+            modal.classList.add('active');
+            
+            // Zapobieganie przewijaniu strony
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeImageModal() {
+            const modal = document.getElementById('imageModal');
+            modal.classList.remove('active');
+            
+            // Przywrócenie przewijania strony
+            document.body.style.overflow = 'auto';
+        }
+
+        // Zamykanie modala klawiszem ESC
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeImageModal();
+            }
+        });
     </script>
 </body>
 </html>

@@ -344,6 +344,128 @@ h1 {
     font-size: 0.9rem;
 }
 
+.goal-images {
+    margin: 16px 0;
+}
+
+.goal-images h4 {
+    font-size: 0.9rem;
+    color: var(--text-color);
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.images-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 8px;
+    max-height: 200px;
+    overflow: hidden;
+}
+
+.image-item {
+    position: relative;
+    aspect-ratio: 1;
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.image-item:hover {
+    transform: scale(1.05);
+}
+
+.image-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.image-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0,0,0,0.7));
+    color: white;
+    padding: 8px;
+    font-size: 0.7rem;
+    transform: translateY(100%);
+    transition: transform 0.2s ease;
+}
+
+.image-item:hover .image-overlay {
+    transform: translateY(0);
+}
+
+.goal-links {
+    margin: 16px 0;
+}
+
+.goal-links h4 {
+    font-size: 0.9rem;
+    color: var(--text-color);
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.links-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.link-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    background: var(--secondary-color);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    text-decoration: none;
+    color: var(--text-color);
+    font-size: 0.8rem;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.link-item:hover {
+    background: #e2e8f0;
+    transform: translateY(-1px);
+}
+
+.link-icon {
+    width: 12px;
+    height: 12px;
+}
+
+/* Modal dla powiększonych zdjęć */
+.image-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 1000;
+    cursor: pointer;
+}
+
+.image-modal.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-image {
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: contain;
+    border-radius: 8px;
+}
+
 footer {
     text-align: center;
     margin-top: 50px;

@@ -96,7 +96,6 @@ h1 {
 }
 
 .goal-card:hover {
-    transform: translateY(-5px);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
 }
 
@@ -358,8 +357,7 @@ h1 {
 .images-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-    gap: 8px;
-    max-height: 200px;
+    gap: 12px;
     overflow: hidden;
 }
 

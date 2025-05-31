@@ -229,12 +229,11 @@
         <p class="last-updated">Ostatnia aktualizacja: 27 maja 2025</p>
         
         <footer>
-            <p>© 2025 | Stworzone z <span style="color: var(--health-color);">❤</span> | <a href="https://github.com/username">GitHub</a></p>
+            <p>© <script>document.write(getCurrentYear())</script> | Stworzone z <span style="color: var(--health-color);">❤</span> | <a href="https://github.com/username">GitHub</a></p>
         </footer>
     </div>
     
     <script>
-        // Funkcja do przełączania widoczności sekcji aktualizacji
         function toggleUpdates(element) {
             const updateList = element.nextElementSibling;
             updateList.classList.toggle('open');
@@ -242,19 +241,11 @@
             const toggleIcon = element.querySelector('.toggle-icon');
             toggleIcon.classList.toggle('open');
         }
-        
-        // Funkcja do aktualizacji postępu
-        function updateProgress(goalIndex, newProgress) {
-            const progressBars = document.querySelectorAll('.progress-value');
-            const progressLabels = document.querySelectorAll('.progress-label span:nth-child(2)');
-            
-            if (goalIndex >= 0 && goalIndex < progressBars.length) {
-                progressBars[goalIndex].style.width = newProgress + '%';
-                progressLabels[goalIndex].textContent = newProgress + '%';
-                
-                document.querySelector('.last-updated').textContent = 'Ostatnia aktualizacja: ' + new Date().toLocaleDateString('pl-PL');
-            }
+
+        function getCurrentYear() {
+            return new Date().getFullYear();
         }
+        
     </script>
 </body>
 </html>
